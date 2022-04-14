@@ -8,6 +8,7 @@ const Form = () => {
   const [address, setAddress] = useState("");
   const [bio, setBio] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -33,99 +34,167 @@ const Form = () => {
     setIsSubmitting(true);
     setTimeout(() => {
       setIsSubmitting(false);
-    }, 2000);
+      setIsSubmitted(true);
+    }, 1000);
+    console.log(gender);
   };
 
   return (
     <>
-      <h1>My Profile</h1>
-      <form onSubmit={handleSubmit} >
-        <div className="name">
-          <label>
-            <div>First Name:</div>
-            <input type="text" value={name} onChange={handleNameChange} disabled={isSubmitting} />
-          </label>
-        </div>
-        <div className="surname">
-          <label>
-            <div>Last Name:</div>
-            <input type="text" value={surname} onChange={handleSurnameChange} disabled={isSubmitting} />
-          </label>
-        </div>
-        <div className="mail">
-          <label>
-            <div>Email:</div>
-            <input type="email" value={email} onChange={handleEmailChange} disabled={isSubmitting} />
-          </label>
-        </div>
-        <div className="gender">
-          <div>Gender:</div>
-          <div onChange={handleGenderChange} className="radio" >
-            <div>
+      {!isSubmitted ? (
+        <div className="wrap">
+          <h1>My Profile</h1>
+          <form onSubmit={handleSubmit}>
+            <div className="name">
               <label>
+                <div>First Name:</div>
                 <input
-                  type="radio"
-                  name="gender"
-                  id="male"
-                  value="male"
-                  checked={gender === "male"}
+                  type="text"
+                  value={name}
+                  onChange={handleNameChange}
                   disabled={isSubmitting}
-                />
-                &#160;Male
-              </label>
-            </div>
-            <div>
-              <label>
-                <input
-                  type="radio"
-                  name="gender"
-                  id="female"
-                  value="female"
-                  checked={gender === "female"}
-                  disabled={isSubmitting}
+                  required
                 />
               </label>
-              &#160;Female
             </div>
-            <div>
+            <div className="surname">
               <label>
+                <div>Last Name:</div>
                 <input
-                  type="radio"
-                  name="gender"
-                  id="other"
-                  value="other"
-                  checked={gender === "other"}
+                  type="text"
+                  value={surname}
+                  onChange={handleSurnameChange}
                   disabled={isSubmitting}
+                  required
                 />
               </label>
-              &#160;Other
             </div>
+            <div className="mail">
+              <label>
+                <div>Email:</div>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={handleEmailChange}
+                  disabled={isSubmitting}
+                  required
+                />
+              </label>
+            </div>
+            <div className="gender">
+              <div>Gender:</div>
+              <div onChange={handleGenderChange} className="radio" >
+                <div>
+                  <label>
+                    <input
+                      type="radio"
+                      name="gender"
+                      id="male"
+                      value="Male"
+                      checked={gender === "Male"}
+                      disabled={isSubmitting}
+                      required
+                    />
+                    &#160;Male
+                  </label>
+                </div>
+                <div>
+                  <label>
+                    <input
+                      type="radio"
+                      name="gender"
+                      id="female"
+                      value="Female"
+                      checked={gender === "Female"}
+                      disabled={isSubmitting}
+                    />
+                  </label>
+                  &#160;Female
+                </div>
+                <div>
+                  <label>
+                    <input
+                      type="radio"
+                      name="gender"
+                      id="other"
+                      value="Other"
+                      checked={gender === "Other"}
+                      disabled={isSubmitting}
+                    />
+                  </label>
+                  &#160;Other
+                </div>
+              </div>
+            </div>
+            <div className="address">
+              <div>Address:</div>
+              <input
+                type="text"
+                name="address"
+                id="address"
+                value={address}
+                onChange={handleAddressChange}
+                disabled={isSubmitting}
+                required
+              />
+            </div>
+            <div>
+              <div>Bio:</div>
+              <textarea
+                className="bio"
+                type="text"
+                value={bio}
+                onChange={handleBioChange}
+                disabled={isSubmitting}
+                required
+              />
+            </div>
+            {isSubmitting && <div>Submitting..</div>}
+            <button type="submit" disabled={isSubmitting}>
+              Submit
+            </button>
+          </form>
+        </div>
+      ) : (
+        <div className="profile">
+          <h1>My Profile</h1>
+          <div>
+            <h3>Name: </h3>
+            <p>
+              {name} {surname}
+            </p>
           </div>
+
+          <div>
+            <h3>Email: </h3>
+            <p>{email}</p>
+          </div>
+
+          <div>
+            <h3>Gender: </h3>
+            <p>{gender}</p>
+          </div>
+
+          <div>
+            <h3>Email: </h3>
+            <p>{email}</p>
+          </div>
+
+          <div>
+            <h3>Address: </h3>
+            <p>{address}</p>
+          </div>
+
+          <div>
+            <h3>Bio: </h3>
+            <p>{bio}</p>
+          </div>
+
+          <form>
+            <button type="submit">Back</button>
+          </form>
         </div>
-        <div className="address">
-          <div>Address:</div>
-          <input
-            type="text"
-            name="address"
-            id="address"
-            value={address}
-            onChange={handleAddressChange}
-            disabled={isSubmitting}
-          />
-        </div>
-        <div>
-          <div>Bio:</div>
-          <textarea
-            className="bio"
-            type="text"
-            value={bio}
-            onChange={handleBioChange}
-            disabled={isSubmitting}
-          />
-        </div>
-        {isSubmitting && <div>Submitting..</div>}
-        <button type="submit" disabled={isSubmitting}>Submit</button>
-      </form>
+      )}
     </>
   );
 };

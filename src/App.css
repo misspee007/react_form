@@ -7,12 +7,24 @@
 
 .App{
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100vw;
   padding: 2rem 0 4rem 0;
-  background-color: #fafafa;
+  background-color: #f1f1f1;
+}
+.wrap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.profile{
+  display: grid;
+  width: 80vw;
+  row-gap: 2rem;
+  background-color: #f1f1f1;
 }
 
 h1{
@@ -77,6 +89,12 @@ button{
     box-shadow: 0 .1rem .5rem rgba(0, 0, 0, 0.064);
   }
 
+  .profile{
+    padding: 0 4rem;
+  }
+  .profile h1{
+    text-align: center;
+  }
   form{
     width: 70%;
   }
