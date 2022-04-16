@@ -176,11 +176,6 @@ const Form = () => {
           </div>
 
           <div>
-            <h3>Email: </h3>
-            <p>{email}</p>
-          </div>
-
-          <div>
             <h3>Address: </h3>
             <p>{address}</p>
           </div>
